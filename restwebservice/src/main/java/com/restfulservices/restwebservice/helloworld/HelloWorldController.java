@@ -1,4 +1,4 @@
-package com.restfulservices.rest.helloworld;
+package com.restfulservices.restwebservice.helloworld;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

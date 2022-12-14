@@ -1,14 +1,13 @@
-package com.restfulservices.rest;
+package com.restfulservices.restwebservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestApplicationTests {
+class RestwebserviceApplicationTests {
 
 	@Test
 	void contextLoads() {
-
 	}
 
 }

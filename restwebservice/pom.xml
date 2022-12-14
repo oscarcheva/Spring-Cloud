@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.restfulservices</groupId>
-	<artifactId>rest</artifactId>
+	<artifactId>restwebservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rest</name>
+	<name>restwebservice</name>
 	<description>First practice</description>
 	<properties>
 		<java.version>17</java.version>

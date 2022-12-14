@@ -1,6 +1,6 @@
-package com.restfulservices.rest.User;
+package com.restfulservices.restwebservice.User;
 
-import com.restfulservices.rest.Error.UserNotFoundException;
+import com.restfulservices.restwebservice.Error.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

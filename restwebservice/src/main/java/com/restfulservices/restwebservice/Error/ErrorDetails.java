@@ -1,4 +1,4 @@
-package com.restfulservices.rest.Error;
+package com.restfulservices.restwebservice.Error;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

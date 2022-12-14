@@ -1,13 +1,10 @@
-package com.restfulservices.rest.User;
+package com.restfulservices.restwebservice.User;
 
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Data
