@@ -1,13 +1,13 @@
-package com.rest.restfulwebservices;
+package com.restfulservices.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RestfulWebServicesApplication {
+public class RestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestfulWebServicesApplication.class, args);
+		SpringApplication.run(RestApplication.class, args);
 	}
 
 }
