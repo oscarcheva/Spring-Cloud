@@ -1,5 +1,6 @@
 package com.restfulservices.restwebservice.User;
 
+import com.restfulservices.restwebservice.Error.PostNotFoundException;
 import com.restfulservices.restwebservice.Error.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -17,27 +18,24 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-public class UserResource {
+public class UserJPAResource {
 
     @Autowired
     UserDAOService service;
 
-    @GetMapping("/users")
+    @GetMapping("/jpa/users")
     public List<User> displayAllUsers() {
         return service.getAllUsers();
     }
 
-
-    @GetMapping("/users/{id}")
+    @GetMapping("/jpa/users/{id}")
     public EntityModel<User> displayUser(@PathVariable int id) {
         User user = service.getUser(id);
-        if (user == null)
-            throw new UserNotFoundException("User not found");
         EntityModel<User> entityModel = EntityModel.of(user);
-
 
         WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).displayAllUsers());
         entityModel.add(link.withRel("all-users"));
@@ -45,7 +43,24 @@ public class UserResource {
         return entityModel;
     }
 
-    @PostMapping("/users")
+    @GetMapping("/jpa/users/{id}/posts")
+    public List<Post> displayPostForUser(@PathVariable int id) {
+        return service.getAllUsersPost(id);
+    }
+
+    @GetMapping("/jpa/users/{userId}/posts/{postid}")
+    public Post getSpecificPostForUser(@PathVariable int userId, @PathVariable int postid)
+            throws PostNotFoundException {
+        return service.getAPost(userId, postid);
+    }
+
+    @DeleteMapping("/jpa/users/{userId}/posts/{postid}")
+    public String deleteAPost(@PathVariable int userId, @PathVariable int postid)
+            throws PostNotFoundException {
+        return "Post deleted";
+    }
+
+    @PostMapping("/jpa/users")
     public ResponseEntity<User> addUser(@RequestBody @Valid User user) {
         User savedUser = service.createUser(user);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -55,10 +70,20 @@ public class UserResource {
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping("/users/{id}")
+    @PostMapping("/jpa/users/{userId}/posts")
+    public ResponseEntity<Post> createPost(@PathVariable int userId, @RequestBody @Valid Post post) {
+        Post createdPost = service.createPost(userId, post);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdPost.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/jpa/users/{id}")
     public String deleteUser(@PathVariable int id) {
         service.deleteUser(id);
         return "User deleted";
     }
-
 }
