@@ -1,48 +1,71 @@
 package com.restfulservices.restwebservice.User;
 
+import com.restfulservices.restwebservice.Error.PostNotFoundException;
+import com.restfulservices.restwebservice.Error.UserNotFoundException;
+import com.restfulservices.restwebservice.JPA.PostRepository;
+import com.restfulservices.restwebservice.JPA.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @Component
 public class UserDAOService {
-    private static List<User> userList = new ArrayList<>();
+    @Autowired
+    UserRepository userRepo;
 
-    static int userCount = 1;
+    @Autowired
+    PostRepository postRepo;
 
-    static {
-        userList.add(new User(userCount++, "Oscar", LocalDate.now().minusYears(30)));
-        userList.add(new User(userCount++, "Enrique", LocalDate.now().minusYears(20)));
-        userList.add(new User(userCount++, "Lus", LocalDate.now().minusYears(25)));
-    }
+    public List<User> getAllUsers() {
 
-    public List<User> findAll() {
-        return userList;
+        return userRepo.findAll();
     }
 
     public User getUser(int id) {
-        return userList
-                .stream()
-                .filter(user -> user.getId().equals(id))
-                .findFirst().orElse(null);
+        User user = userRepo.findById(id).orElse(null);
+        if (user == null) {
+            throw new UserNotFoundException("User not found with Id: " + id);
+        }
+        return user;
     }
 
-    public User addUser(User user) {
-        user.setId(userCount);
-        userCount++;
-        userList.add(user);
-        return userList
-                .stream()
-                .filter(anUser -> anUser.getId().equals(user.getId()))
-                .findFirst().orElse(null);
+    public User createUser(User user) {
+        return userRepo.save(user);
     }
 
     public void deleteUser(int id) {
-        userList.remove(userList
+
+        userRepo.delete(getUser(id));
+    }
+
+    public List<Post> getAllUsersPost(int userId) {
+        return getUser(userId).getPosts();
+    }
+
+    public Post getAPost(int userId, int postId) throws PostNotFoundException {
+        Post post = Optional.ofNullable(getUser(userId))
+                .map(User::getPosts)
+                .orElse(new ArrayList<>())
                 .stream()
-                .filter(user -> user.getId().equals(id))
-                .findFirst().orElse(null));
+                .filter(v -> v.getId() == postId)
+                .findFirst()
+                .orElse(null);
+        if (post == null) {
+            throw new PostNotFoundException("Post not found with Id: " + postId + " for user: " + userId);
+        }
+        return post;
+    }
+
+    public Post createPost(int userId, Post post) {
+        post.setUser(getUser(userId));
+        return postRepo.save(post);
+    }
+
+    public void deletePost(int userId, int postId) throws PostNotFoundException {
+        postRepo.delete(getAPost(userId, postId));
     }
 }
