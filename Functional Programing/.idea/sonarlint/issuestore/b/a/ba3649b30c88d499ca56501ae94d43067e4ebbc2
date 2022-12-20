@@ -1,0 +1,22 @@
+
+b
+java:S1192"LDefine a constant instead of duplicating this literal "Spring boot" 4 times.(°›¨Ë
+]
+java:S1192"GDefine a constant instead of duplicating this literal "Spring" 5 times.(°›¨Ë
+a
+java:S1192"KDefine a constant instead of duplicating this literal "Kubernetes" 4 times.(°›¨Ë
+V	java:S125"<This block of commented-out lines of code should be removed.(ŸëØÚøÿÿÿÿ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(™†­ˆ
+Q
+java:S1612";Replace this lambda with method reference 'String::length'.(×ºÅš
+S	java:S106"9Replace this use of System.out or System.err by a logger.(¹¦…‡úÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(¬÷­øÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(¹¦…‡úÿÿÿÿ
+S	java:S106#"9Replace this use of System.out or System.err by a logger.(Ç˜€Øþÿÿÿÿ
+S	java:S106("9Replace this use of System.out or System.err by a logger.(¹¦…‡úÿÿÿÿ
+S	java:S106."9Replace this use of System.out or System.err by a logger.(¹¦…‡úÿÿÿÿ
+S	java:S1064"9Replace this use of System.out or System.err by a logger.(¹¦…‡úÿÿÿÿ
+S	java:S1069"9Replace this use of System.out or System.err by a logger.(¹¦…‡úÿÿÿÿ
+S	java:S106B"9Replace this use of System.out or System.err by a logger.(¹¦…‡úÿÿÿÿ
+V	java:S125E"<This block of commented-out lines of code should be removed.(ÚÝÊ¿øÿÿÿÿ
+P	java:S125K"<This block of commented-out lines of code should be removed.(ÊóÐ
